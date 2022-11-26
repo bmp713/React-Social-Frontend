@@ -74,13 +74,14 @@ export default function Messages(){
         // });
     };
     
-    //Read message from Firebase
+    // Read message from Firebase
     const readMessage = async (id) => {
 
         let data = await doc( collection(db, 'messages', id) );
         console.log("readMessage() data =>", data);
     };
 
+    // Create message post
     const createMessage = async (e) => {
 
         e.preventDefault();
