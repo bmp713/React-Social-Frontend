@@ -1,0 +1,108 @@
+_________________________________
+GitHub
+
+Login github in browser
+cd root 
+git init
+git add *
+git commit -m "intial"
+git remote add origin https://github.com/bmp713/React.git
+git push -u origin <branch>
+
+// push one branch to another
+git push origin app7:master
+
+// switch branch
+git checkout master 
+
+// create
+git checkout -b branch  
+
+// delete
+git branch -D brandon 
+git push -u origin branch
+
+
+git status
+git reset --hard origin/master 
+// reset to branch
+
+Settings -> Branches -> Default branch 
+
+_________________________________
+Deploy
+
+npm i netlify-cli -g
+npm run build
+
+Review draft url
+netlify deploy
+publish directory
+  ./build
+
+Publish production
+netlify deploy --prod
+
+https://app.netlify.com/sites/app7-react/deploys
+Options -> Deploy Settings -> Link repository
+
+Delete .netlify after deleting before new deploy
+
+
+
+_________________________________
+Firebase
+npm i firebase react-firebase-hooks
+
+
+_________________________________
+React WEB
+
+npx create-react-app App
+npm start
+
+
+________________________________
+React-Native Windows EXPO
+
+npm install -g expo-cli
+expo init App
+cd App
+npm run web
+
+
+_________________________________
+React Native Windows
+
+https://docs.microsoft.com/en-us/windows/dev-environment/javascript/react-native-for-windows
+
+npx react-native init App
+npx react-native-windows-init --overwrite
+npx react-native run-windows
+
+
+
+_________________________________
+React NATIVE
+
+npm i -g react-native-cli
+npx react-native init App --template react-native@^0.68.0
+cd App
+npx react-native-windows-init --overwrite
+npx react-native autolink-windows
+https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native
+
+root -> notepad.vscode/launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Windows",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "windows"
+    }
+  ]
+}
+

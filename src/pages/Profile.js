@@ -1,0 +1,93 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-unused-vars */
+
+import '../App.scss';
+import React, { useState, useEffect, useContext } from 'react';
+import {Link, Route, Routes, useNavigate, BrowserRouter as Router, Navigate} from 'react-router-dom';
+import { doc, addDoc, setDoc, getDocs, deleteDoc, collection } from 'firebase/firestore';
+import { db } from '../Firebase';
+
+import Friends from '../components/Friends';
+import Gallery from '../components/Gallery';
+import Messages from '../components/Messages';
+import Image from '../components/Image';
+import Users from '../components/Users';
+import News from '../components/News';
+import Email from '../components/Email';
+
+import {UserContext} from '../contexts/UserContext';
+
+export default function Profile(){
+
+    const { currentUser, login, logout, setCurrentUser, updateUserFirebase, deleteUserFirebase } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
+    const logoutProfile = () => {
+        updateUserFirebase(currentUser);
+        logout();
+        navigate('/');
+    }
+
+    return(
+        <div className='profile page'
+        >
+            <div className="header row justify-content-start align-items-start">
+                <div className="col-lg-6 text-left">
+
+                    <div className="row justify-content-start align-items-center my-0">
+                        <div className="col-lg-10 text-left my-0">
+                            <div style={{fontSize:'14px', lineHeight:'1.2'}}>
+                                <h2 className="my-0">                            
+                                    {currentUser.first} {currentUser.last}
+                                </h2>
+                                <span className="d-none d-lg-inline-block">
+                                    {currentUser.email}<br></br>
+                                </span>    
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div className="col-lg-6 py-0 text-lg-end">
+                    <p className="profile-settings m-0">
+                        <span style={{color:'#4267d9'}}>{currentUser.email}</span> is signed in
+                        <a href>
+                            <Image/>
+                        </a>
+                        <button onClick={logoutProfile} className="app-btn m-lg-1">Sign Out</button><br></br>
+                        <a href
+                            className="mx-2 text-white"
+                            onClick={ () => {
+                                console.log("deleteUserFIrebase => ", currentUser.id);
+                                deleteUserFirebase(currentUser);
+                                setCurrentUser('');
+                                navigate('/');
+                            }}
+                        >
+                            Delete Account
+                        </a>
+                        <span><img width="20px" className="m-3" src="./assets/Icon-gear-white.png" alt='new'/></span>
+                    </p>
+                </div>
+            </div>
+            <div className="row justify-content-center align-items-start">
+                <div className="col-lg-5 text-left m-lg-1 order-2">
+                    <Friends/>
+                    <Gallery/>
+                    <Users/>
+                    <News/>
+                </div>
+                <div className="col-lg-5 text-left my-lg-1 order-1">
+                    <Messages/>
+                </div>
+            </div>
+
+
+        </div>  
+    )
+}
+
+
+
