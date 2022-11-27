@@ -24,7 +24,7 @@ export default function Gallery(){
         search: "",
     });
 
-    const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState(true);
     //const [showMenuID, setShowMenuID] = useState(false);
 
     const [showURL, setShowURL] = useState(false);
