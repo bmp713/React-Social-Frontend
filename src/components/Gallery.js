@@ -30,7 +30,6 @@ export default function Gallery(){
     const [showURL, setShowURL] = useState(false);
     const [showURL_ID, setShowURL_ID] = useState(null);
     
-
     //const fileRef = useRef(null);
     const [file, setFile] = useState("");
     const [imageURL, setImageUrl] = useState(null);
@@ -67,45 +66,41 @@ export default function Gallery(){
     const createImage = async (e) => {
         e.preventDefault();
 
-        // if( !formData.name ){
-        //     setError(true);
-        //     return;
-        // }
-        // else setError(false);
-
         let docRef;
         try{
             docRef = await addDoc( collection(db, 'gallery'), {});
             console.log('id => '+ docRef.id);
+            console.log("images =>", images);
+            readGallery();
         }catch(error){
             console.log(error);
         }
 
-        // Generate random headshot image with fetch API
-        await fetch('https://source.unsplash.com/collection/928423/480x640', {
-            headers: {'Content-Type':'application/json'},
-            crossDomain: true,
-            mode: 'no-cors',
-            method: 'GET'
-        })
-            .then( data => {
-                console.log("Fetch image =>", data );
-            } )
-            .catch( error => {
-                console.log("Fetch error => ", error);
-            });
-        
-        // https://unsplash.com/collections/302501,895539,277630,1041983,546927
-        // https://source.unsplash.com/collection/{collectionID}/{imageWidth}x{imageHeight}/?sig=randomNumber
-        // https://source.unsplash.com/collection/collectionID/400x600/?sig=imageID
-
-        let random = Math.floor(Math.random() * 100000);
         let urlImg;
+        // // Generate random headshot image with fetch API
+        // await fetch('https://source.unsplash.com/collection/928423/480x640', {
+        //     headers: {'Content-Type':'application/json'},
+        //     crossDomain: true,
+        //     mode: 'no-cors',
+        //     method: 'GET'
+        // })
+        //     .then( data => {
+        //         console.log("Fetch image =>", data );
+        //     } )
+        //     .catch( error => {
+        //         console.log("Fetch error => ", error);
+        //     });
+        
+        // // https://unsplash.com/collections/302501,895539,277630,1041983,546927
+        // // https://source.unsplash.com/collection/{collectionID}/{imageWidth}x{imageHeight}/?sig=randomNumber
+        // // https://source.unsplash.com/collection/collectionID/400x600/?sig=imageID
 
-        formData.search ? 
-            urlImg = 'https://source.unsplash.com/random/?' + formData.search : 
-            urlImg = 'https://source.unsplash.com/random/546927'
-        ;
+        // let random = Math.floor(Math.random() * 100000);
+
+        // formData.search ? 
+        //     urlImg = 'https://source.unsplash.com/random/?' + formData.search : 
+        //     urlImg = 'https://source.unsplash.com/random/546927'
+        // ;
 
         await setDoc( doc(db, 'gallery', docRef.id.toString() ), {
             id: docRef.id,
@@ -116,8 +111,6 @@ export default function Gallery(){
         })
         readGallery();
         setImageUrl('');
-
-    
     };
     // Upload file to Firebase
     const uploadFile = (e) => {
@@ -180,12 +173,12 @@ export default function Gallery(){
                                     setShowMenu( !showMenu );
                                 }}
                             >
-                                <img 
+                                {/* <img 
                                     height="20" 
                                     className="mx-2 float-end" 
-                                    style={{transform:"translateY(50%)"}}
+                                    style={{transform:"translateY(00%)"}}
                                     src="./assets/Icon-dots-black.png" alt='new'
-                                />
+                                /> */}
                             </a>
                             <img 
                                 width="100%"
@@ -238,11 +231,11 @@ export default function Gallery(){
                             <div className="row text-left my-0">
                                 <h4>Add Image</h4>  
                             </div>
-                            <input 
+                            {/* <input 
                                 value={formData.search} 
                                 onChange={ function(e){ setFormData({...formData, search: e.target.value}) } }    
                                 type="text" placeholder="Search by category"
-                            />
+                            /> */}
                             <input 
                                 value={formData.image} 
                                 onChange={ function(e){ setFormData({...formData, image: e.target.value}) } }    
@@ -254,6 +247,7 @@ export default function Gallery(){
                                     setFile( e.target.files[0] );
                                     console.log("file =>", file);
                                     uploadFile(e);
+                                    createImage();
                                 }}    
                                 type="file"
                             /><br></br>

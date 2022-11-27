@@ -21,6 +21,9 @@ export default function Messages(){
     const [showMenuID, setShowMenuID] = useState(null);
     const [showMenu, setShowMenu] = useState(false);
 
+    const [users, setUsers] = useState("");
+    const [userImage, setUserImage] = useState();
+
     const [showComment, setShowComment] = useState(false);
     const [commentID, setCommentID] = useState(0);
     const [comments, setComments] = useState([]);
@@ -43,25 +46,47 @@ export default function Messages(){
     const [likeID, setLikeID] = useState();
 
     useEffect(() => {
+        readUsers();
         readMessages();
     },[]);
 
+    //Read users from Firebase
+    const readUsers = async () => {
+
+        let data = await getDocs( collection(db, 'users') );
+        setUsers( 
+            data.docs.map( (doc) => 
+                ({ ...doc.data() }) 
+            ) 
+        );
+        data.forEach( (message) => {
+            // console.log("readUsers() message.data().id =>",  message.data().id );
+            console.log("readUsers() => readUser( message.data().id ) =>", readUser(message.data().id) );
+        });
+        // console.log("users =>)", users);
+    };
+
+    // Read single user to update images and comments
+    const readUser = (id) => {
+        let user = users.find( (user) => user.id === id);
+        // console.log("readUser() imgURL=>", user.imgURL);
+
+        return user.imgURL;
+    }
+
     //Read messages from Firebase
     const readMessages = async () => {
-
         let data = await getDocs( collection(db, 'messages') );
         setMessages( 
             data.docs.map( (doc) => 
                 ({ ...doc.data() }) 
             ) 
         );
-
-        // setMessages( messages.sort( 
-        // (a, b) => {
-        //     return a.date - b.date;
-        // }
-        // ));
         
+        // data.forEach( (message) => {
+        //     console.log("readMessages() message.data().userID =>",  message.data().userID );
+        // });
+
         data = await getDocs( collection(db, 'comments') );
         setComments( 
             data.docs.map( (doc) => 
@@ -69,16 +94,7 @@ export default function Messages(){
             ) 
         );
 
-        // data.forEach( (message) => {
-        //     console.log("readMessages() message.data().userID =>",  message.data().userID );
-        // });
-    };
-    
-    // Read message from Firebase
-    const readMessage = async (id) => {
 
-        let data = await doc( collection(db, 'messages', id) );
-        console.log("readMessage() data =>", data);
     };
 
     // Create message post
@@ -119,8 +135,6 @@ export default function Messages(){
             setImageUrl("");
             setImageUrl(null);
             setFile(null);
-            // setFormData("");
-
         }catch(error){
             console.log(error);
         }
@@ -130,11 +144,9 @@ export default function Messages(){
 
         e.preventDefault();
         console.log("createComment =>", formData.comment);
-        console.log("e.currentTarget.id => ", e.currentTarget.id);
  
         // Add new comment to database
         let docRef;
-
 
         let date = new Date();
         let time = ( 
@@ -210,11 +222,6 @@ export default function Messages(){
         console.log("docSnap.data() =>", docSnap.data().imageURL)
 
         try{
-            // await setDoc( doc(db, 'messages', id ), {
-            //     ...docSnap.data,
-            //     message: formData.message,
-            //     imageURL: imageURL
-            // })
             await setDoc( doc(db, 'messages', id ), {
                 id: docSnap.data().id,
                 email: docSnap.data().email,
@@ -322,11 +329,15 @@ export default function Messages(){
 
             {messages.slice(0, messagesCount).map( (message) => (
                 <div className="message mb-3 mt-2" id={message.id} key={message.id}>
+                    { 
+                        // readUser(message.userID)
+                    }
                     <div className="col-lg-12 px-lg-2 pt-3 pb-2" >              
                         <img 
                             width="50" height="50" 
                             style={{borderRadius:'50%'}}
-                            src={message.userImg} alt="new"
+                            src={readUser(message.userID)} 
+                            alt="new"
                         />
                         <span 
                             className="mx-2"
@@ -491,7 +502,9 @@ export default function Messages(){
                                                 <img    
                                                     height="30" className="m-2" 
                                                     style={{borderRadius:'50%', transform:"translate(-40%, 0%)"}}
-                                                    src={comment.userImg} alt="new"
+                                                    src={readUser(comment.userId)} 
+                                                    alt="new"
+
                                                 />
                                                 
                                             </div>
