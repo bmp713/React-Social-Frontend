@@ -13,23 +13,12 @@ import { getAuth } from "firebase/auth";
 // };
 
 // const firebaseConfig = {
-//   apiKey: "AIzaSyCVAgh7RpDc4i6Sh2Tu4HFHYalAZ2WGBUs",
-//   authDomain: "social-e7a3f.firebaseapp.com",
-//   projectId: "social-e7a3f",
-//   storageBucket: "social-e7a3f.appspot.com",
-//   messagingSenderId: "906751269754",
-//   appId: "1:906751269754:web:b81222b46808165f8394c3",
-//   measurementId: "G-ZDXPMMG9XV"
-// };
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBwOzhcaTYFKRkNkyW2OzYP07z_8AhUVo0",
-//   authDomain: "social7-abee6.firebaseapp.com",
-//   projectId: "social7-abee6",
-//   storageBucket: "social7-abee6.appspot.com",
-//   messagingSenderId: "274329093237",
-//   appId: "1:274329093237:web:6196d88aaab4f31a9f643c",
-//   measurementId: "G-JYKP8H0LHB"
+//   apiKey: "AIzaSyCJvgqmdDv9MGhdQ9T0qqNQnm6YFzbjbGU",
+//   authDomain: "react-ea25e.firebaseapp.com",
+//   projectId: "react-ea25e",
+//   storageBucket: "react-ea25e.appspot.com",
+//   messagingSenderId: "753454879893",
+//   appId: "1:753454879893:web:2a5af30a542ced76b1b79c"
 // };
 
 const firebaseConfig = {

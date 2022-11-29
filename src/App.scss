@@ -134,7 +134,8 @@ header{
         font-size: 14px; 
         background: #ffff; 
         border-radius: 3px; 
-        box-shadow: 20px 20px 20px #0005;
+        box-shadow: 10px 10px 25px #0005;
+        transition: all 1s;
         
         .msgMenu{
             position: absolute;
@@ -152,6 +153,12 @@ header{
             max-height: 500px;
         }
     }
+
+    // .message:hover{
+    //     box-shadow: 30px 30px 50px #0007;
+    //     transition: all 1s;
+    // }
+
     h2{
         font-size: 36px;
         font-weight: 500;    

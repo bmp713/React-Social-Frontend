@@ -31,7 +31,7 @@ export default function Image(){
     },[] );
 
     // Create user additional profile data in users db
-    const updateUserImage= async (imageURL) => {
+    const updateUserImage = async (imageURL) => {
 
         console.log("updateUserImage URL =>", imageURL);
 
@@ -40,7 +40,7 @@ export default function Image(){
             let data = await getDocs(docs);
 
             data.forEach( (doc) => {
-                console.log( "IMAGE doc.data() =>", doc.data() );    
+                console.log( "updateUserImage() doc.data() =>", doc.data() );    
             });
 
             try{
@@ -48,8 +48,7 @@ export default function Image(){
                     ...currentUser,
                     imgURL: imageURL
                 })
-                setError(false);
-                setFormMsg("New profile image is updated");
+                currentUser.imgURL = imageURL;
 
                 window.location.reload();
             }catch(error){
@@ -65,9 +64,6 @@ export default function Image(){
         setFormMsg(false);
 
         const file = e.target.files[0];
-        console.log("file =>", file);
-        console.log("event =>", e);
-
         const storageRef = ref(storage, 'files/'+ file.name );
 
         uploadBytes(storageRef, file )

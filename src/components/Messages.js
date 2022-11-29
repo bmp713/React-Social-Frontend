@@ -24,7 +24,9 @@ export default function Messages(){
     const [users, setUsers] = useState("");
     const [userImage, setUserImage] = useState();
 
+
     const [showComment, setShowComment] = useState(false);
+    const [commentIDS, setCommentIDS] = useState([]);
     const [commentID, setCommentID] = useState(0);
     const [comments, setComments] = useState([]);
 
@@ -69,8 +71,6 @@ export default function Messages(){
     // Read single user to update images and comments
     const readUser = (id) => {
         let user = users.find( (user) => user.id === id);
-        // console.log("readUser() imgURL=>", user.imgURL);
-
         return user.imgURL;
     }
 
@@ -93,8 +93,6 @@ export default function Messages(){
                 ({ ...doc.data() }) 
             ) 
         );
-
-
     };
 
     // Create message post
@@ -199,8 +197,6 @@ export default function Messages(){
         try{
             await deleteDoc( doc(db, 'messages', id) );
             readMessages();
-            // setFormData("");
-            // setImageUrl("");
             setImageUrl("");
 
         }catch(error){
@@ -219,20 +215,11 @@ export default function Messages(){
         if( docSnap.data().imageURL ){
             setImageUrl( docSnap.data().imageURL );
         }
-        console.log("docSnap.data() =>", docSnap.data().imageURL)
-
         try{
             await setDoc( doc(db, 'messages', id ), {
-                id: docSnap.data().id,
-                email: docSnap.data().email,
-                first: docSnap.data().first,
-                last: docSnap.data().last,
+                ...docSnap.data(),
                 message: formData.message,
-                userImg: docSnap.data().userImg,
-                userID: docSnap.data().userID,
                 imageURL: imageURL, 
-                likes: docSnap.data().likes,
-                time: docSnap.data().time
             })
             readMessages();
             setImageUrl("");            
@@ -253,16 +240,8 @@ export default function Messages(){
             console.log("newLikes =>", newLikes);
             try{
                 await setDoc( doc(db, 'messages', id ), {
-                    id: docSnap.data().id,
-                    email: docSnap.data().email,
-                    first: docSnap.data().first,
-                    last: docSnap.data().last,
-                    message: docSnap.data().message,
-                    userImg: docSnap.data().userImg,
-                    userID: docSnap.data().userID,
-                    imageURL: docSnap.data().imageURL,
-                    likes: newLikes,
-                    time: docSnap.data().time
+                    ...docSnap.data(),
+                    likes: newLikes
                 })
                 readMessages();
             }catch(error){
@@ -280,13 +259,11 @@ export default function Messages(){
 
         const file = e.target.files[0];
         console.log("file =>", file);
-        console.log("event =>", e);
 
         const storageRef = ref(storage, 'files/'+ file.name );
 
         uploadBytes(storageRef, file )
             .then( (snapshot) => {
-                console.log('Uploaded file'); 
                 console.log('snapshot =>', snapshot);
                 setError(false);
 
@@ -303,7 +280,6 @@ export default function Messages(){
     }
 
     const msgMenuClicked = async (e) => {
-        console.log("e.currentTarget.id => ", e.currentTarget.id);
         setShowMenuID(e.currentTarget.id);
         setShowMenu( !showMenu );
 
@@ -313,14 +289,13 @@ export default function Messages(){
         setFile(docSnap.data().imageURL); 
         setImageUrl( docSnap.data().imageURL );
         setFormData({...formData, imageURL: docSnap.data().imageURL});
-
-        console.log("docSnap.data() =>", docSnap.data().imageURL)
-        console.log("formData.imgURL =>", formData.imgURL)
     }
 
     const showCommentID = async (id) => {
-        console.log("message.id => ", id);
         setCommentID(id);
+
+        // setCommentIDS([...commentIDS, {id:id, show:true}]);
+        console.log("commentIDS =>" , commentIDS);
     }
 
     return(
@@ -329,9 +304,6 @@ export default function Messages(){
 
             {messages.slice(0, messagesCount).map( (message) => (
                 <div className="message mb-3 mt-2" id={message.id} key={message.id}>
-                    { 
-                        // readUser(message.userID)
-                    }
                     <div className="col-lg-12 px-lg-2 pt-3 pb-2" >              
                         <img 
                             width="50" height="50" 
@@ -360,7 +332,9 @@ export default function Messages(){
                                 }}
                             >    
                                 <img 
-                                    height="20" className="mx-2 float-end" 
+                                    height="20" 
+                                    className="mx-2 float-end" 
+                                    style={{transform: "translate(0%,-15%)"}}
                                     src="./assets/Icon-dots-black.png" alt='new'
                                 />
                                 { showMenu && <div id={message.id}></div> }
@@ -462,7 +436,6 @@ export default function Messages(){
                                     id={message.id} 
                                     onClick={ (e) => {
                                         updateLikes(message.id);
-                                        console.log("likeID =>", e.currentTarget.id);
                                     }} 
                                 >
                                     { message.likes ? 
@@ -480,8 +453,8 @@ export default function Messages(){
                             <div className="my-1 col-4 text-end">
                                 <a href
                                     onClick={ (e) => {
-                                        console.log("Comment =>", e.currentTarget.id);
-                                        setShowComment(!showComment);
+                                        console.log("Message =>", message.id);
+                                        // setShowComment(!showComment);
                                         showCommentID(message.id);
                                     }} 
                                 >
@@ -504,7 +477,6 @@ export default function Messages(){
                                                     style={{borderRadius:'50%', transform:"translate(-40%, 0%)"}}
                                                     src={readUser(comment.userId)} 
                                                     alt="new"
-
                                                 />
                                                 
                                             </div>
@@ -530,7 +502,10 @@ export default function Messages(){
 
 
                             { 
+                                // commentID === message.id && commentIDS[message.id] &&
+                                // commentID === message.id && showComment &&
                                 commentID === message.id && 
+
                                 <div className="mx-auto">
                                     <form id='comment'>
                                         <input 
@@ -614,12 +589,12 @@ export default function Messages(){
             </div>
             { (messagesCount < messages.length) &&
             <button 
-                    style={{padding:'10px 0px', 
-                        color:"white", fontSize:'14px', 
-                    }}
-                    onClick={ () =>{ setMessagesCount( messagesCount + 2) }}
-                >
-                    Load more...
+                style={{padding:'10px 0px', 
+                    color:"white", fontSize:'14px', 
+                }}
+                onClick={ () =>{ setMessagesCount( messagesCount + 2) }}
+            >
+                Load more...
             </button>
             }
         </div>
