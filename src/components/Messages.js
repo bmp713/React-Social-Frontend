@@ -68,7 +68,7 @@ export default function Messages(){
         // console.log("users =>)", users);
     };
 
-    // Read single user to update images and comments
+    // Read single user to update profile images and comments
     const readUser = (id) => {
         let user = users.find( (user) => user.id === id);
         return user.imgURL;
@@ -76,23 +76,31 @@ export default function Messages(){
 
     //Read messages from Firebase
     const readMessages = async () => {
-        let data = await getDocs( collection(db, 'messages') );
-        setMessages( 
-            data.docs.map( (doc) => 
-                ({ ...doc.data() }) 
-            ) 
-        );
-        
-        // data.forEach( (message) => {
-        //     console.log("readMessages() message.data().userID =>",  message.data().userID );
-        // });
+        let data;
+        try{
+            data = await getDocs( collection(db, 'messages') );
+            setMessages( 
+                data.docs.map( (doc) => 
+                    ({ ...doc.data() }) 
+                ) 
+                .sort(function(a,b){
+                    return (b.date - a.date)
+                })
+            );
+        }catch(error){ console.log(error);}
 
-        data = await getDocs( collection(db, 'comments') );
-        setComments( 
-            data.docs.map( (doc) => 
-                ({ ...doc.data() }) 
-            ) 
-        );
+        try{
+            data = await getDocs( collection(db, 'comments') );
+            setComments( 
+                data.docs.map( (doc) => 
+                    ({ ...doc.data() }) 
+                ) 
+                .sort(function(a,b){
+                    return (a.date - b.date)
+                })
+            );
+        }catch(error){ console.log(error);}
+
     };
 
     // Create message post
@@ -127,7 +135,8 @@ export default function Messages(){
                 userID: currentUser.id,
                 imageURL: imageURL,
                 likes: 0,
-                time: time
+                time: time,
+                date: date
             })
             readMessages();
             setImageUrl("");
@@ -167,7 +176,8 @@ export default function Messages(){
                 userImg: formData.userId,
                 userName: formData.userName,
                 comment: formData.comment,
-                time: time
+                time: time,
+                date: date 
             })
             readMessages();
             // setShowComment(!showComment);
@@ -210,16 +220,16 @@ export default function Messages(){
 
         let data = await doc( db, 'messages', id );
         const docSnap = await getDoc(data);
-        
-        // let image;
-        if( docSnap.data().imageURL ){
+
+        // Display image thumb in form
+        // if( docSnap.data().imageURL ){
             setImageUrl( docSnap.data().imageURL );
-        }
+        // }
         try{
             await setDoc( doc(db, 'messages', id ), {
                 ...docSnap.data(),
                 message: formData.message,
-                imageURL: imageURL, 
+                imageURL: imageURL
             })
             readMessages();
             setImageUrl("");            
@@ -237,7 +247,6 @@ export default function Messages(){
             const docSnap = await getDoc(data);
 
             let newLikes = docSnap.data().likes + 1; 
-            console.log("newLikes =>", newLikes);
             try{
                 await setDoc( doc(db, 'messages', id ), {
                     ...docSnap.data(),
@@ -258,8 +267,6 @@ export default function Messages(){
         e.preventDefault();
 
         const file = e.target.files[0];
-        console.log("file =>", file);
-
         const storageRef = ref(storage, 'files/'+ file.name );
 
         uploadBytes(storageRef, file )
@@ -318,6 +325,7 @@ export default function Messages(){
                             {message.first} {message.last} 
                             <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
                                 {message.time}
+                                {/* {message.date} */}
                             </span>
                         </span>
 

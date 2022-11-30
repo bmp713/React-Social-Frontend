@@ -31,11 +31,9 @@ export default function Profile(){
     }
 
     return(
-        <div className='profile page'
-        >
+        <div className='profile page'>
             <div className="header row justify-content-start align-items-start">
                 <div className="col-lg-6 text-left">
-
                     <div className="row justify-content-start align-items-center my-0">
                         <div className="col-lg-10 text-left my-0">
                             <div style={{fontSize:'14px', lineHeight:'1.2'}}>

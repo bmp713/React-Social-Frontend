@@ -38,7 +38,6 @@ export default function Friends(){
             setFriendsCount( friendsCount => friendsCount + 1 );
             console.log('friend.id => ' + friend.id );
         });
-        //console.log("currentUser.friends =>", currentUser.friends);
     };
     
     const deleteFriend = async (id) => {
