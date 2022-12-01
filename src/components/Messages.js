@@ -221,6 +221,12 @@ export default function Messages(){
         let data = await doc( db, 'messages', id );
         const docSnap = await getDoc(data);
 
+        let date = new Date();
+        let time = ( 
+            date.getMonth()+ 1 ) + "/" + date.getDate() + "/" + date.getFullYear() + " " + (date.getHours() % 12 || 12) + ":" 
+            + ( (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes() )
+            + (date.getHours() >=12 ? "PM":"AM" );        
+
         // Display image thumb in form
         // if( docSnap.data().imageURL ){
             setImageUrl( docSnap.data().imageURL );
@@ -229,7 +235,9 @@ export default function Messages(){
             await setDoc( doc(db, 'messages', id ), {
                 ...docSnap.data(),
                 message: formData.message,
-                imageURL: imageURL
+                imageURL: imageURL,
+                time: time,
+                date: date
             })
             readMessages();
             setImageUrl("");            
@@ -325,7 +333,6 @@ export default function Messages(){
                             {message.first} {message.last} 
                             <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
                                 {message.time}
-                                {/* {message.date} */}
                             </span>
                         </span>
 
@@ -359,19 +366,6 @@ export default function Messages(){
                         <div className="mx-1">
                             {message.message}<br></br>
                         </div>
-
-
-                        {/* 
-                        {videoURL &&
-                            <div className="row justify-content-center align-items-center my-5">
-                                <video width="100%" controls autoplay>
-                                    <source 
-                                        src={videoURL} 
-                                        type="video/mp4">
-                                    </source>
-                                </video>
-                            </div>
-                        } */}
 
 
                         {   currentUser.email === message.email &&
@@ -540,16 +534,6 @@ export default function Messages(){
                     </div>
                 </div>
             ))} 
-
-
-            {/* { (messagesCount <= messages.length) &&
-                <button 
-                        style={{padding:'10px 0px', color:"white", fontSize:'14px'}}
-                        onClick={ () =>{ setMessagesCount( messagesCount + 2) }}
-                    >
-                        Load more...
-                </button>
-            } */}
 
 
             <div className="create text-left my-2 mb-2">        
