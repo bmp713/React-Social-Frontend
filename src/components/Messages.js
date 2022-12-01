@@ -246,7 +246,7 @@ export default function Messages(){
                 message: formData.message,
                 imageURL: imageURL,
                 time: time,
-                // date: date,
+                date: date,
                 edited: true
             })
             readMessages();
