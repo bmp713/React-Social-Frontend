@@ -236,7 +236,6 @@ export default function Messages(){
             + ( (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes() )
             + (date.getHours() >=12 ? "PM":"AM" );        
 
-        // Display image thumb in form
         // if( docSnap.data().imageURL ){
             setImageUrl( docSnap.data().imageURL );
         // }
