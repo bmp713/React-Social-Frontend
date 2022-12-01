@@ -17,6 +17,8 @@ export default function Messages(){
     const [messagesCount, setMessagesCount] = useState(4);
     const [messages, setMessages] = useState([]);
     const [error, setError] = useState(false);
+    const [edited, setEdited] = useState(false);
+    const [sort, setSort] = useState(false);
 
     const [showMenuID, setShowMenuID] = useState(null);
     const [showMenu, setShowMenu] = useState(false);
@@ -87,6 +89,14 @@ export default function Messages(){
                     return (b.date - a.date)
                 })
             );
+            if(sort){
+                console.log("sort messages");
+                setMessages( 
+                    messages.sort(function(a,b){
+                        return (b.date - a.date)
+                    })
+                );
+            }
         }catch(error){ console.log(error);}
 
         try{
@@ -100,7 +110,6 @@ export default function Messages(){
                 })
             );
         }catch(error){ console.log(error);}
-
     };
 
     // Create message post
@@ -237,7 +246,8 @@ export default function Messages(){
                 message: formData.message,
                 imageURL: imageURL,
                 time: time,
-                date: date
+                // date: date,
+                edited: true
             })
             readMessages();
             setImageUrl("");            
@@ -315,7 +325,14 @@ export default function Messages(){
 
     return(
         <div className="messages row text-left align-items-center p-lg-5 pb-lg-3 p-3 my-2">
-            <h2 className="mx-2">News Feed</h2>
+            <h2 className="mx-2">News Feed 
+                {/* <a href
+                    className="float-end text-white"
+                    onClick={ (e) => { setSort(!sort); } }
+                >
+                        Recent
+                </a> */}
+            </h2>
 
             {messages.slice(0, messagesCount).map( (message) => (
                 <div className="message mb-3 mt-2" id={message.id} key={message.id}>
@@ -333,6 +350,10 @@ export default function Messages(){
                             {message.first} {message.last} 
                             <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
                                 {message.time}
+
+                                {/* {message.edited && 
+                                        <span class="mx-1" style={{fontSize:"8px"}}>Edited</span>
+                                } */}
                             </span>
                         </span>
 
