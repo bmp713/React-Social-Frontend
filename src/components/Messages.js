@@ -311,7 +311,7 @@ export default function Messages(){
 
     return(
         <div className="messages row text-left align-items-center p-lg-5 pt-lg-4 pb-lg-3 p-3 my-0">
-            <h2 className="mx-2">News Feed 
+            <h2 className="mx-1">News Feed 
                 <span className="float-end">
                     <a href 
                         onClick={ (e) => { 
