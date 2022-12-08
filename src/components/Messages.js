@@ -306,12 +306,10 @@ export default function Messages(){
         setImageUrl( docSnap.data().imageURL );
         setFormData({...formData, imageURL: docSnap.data().imageURL});
     }
-
     const showCommentID = async (id) => {
         setCommentID(id);
         console.log("commentIDS =>" , commentIDS);
     }
-
     return(
         <div className="messages row text-left align-items-center p-lg-5 pt-lg-4 pb-lg-3 p-3 my-0">
             <h2 className="mx-2">News Feed 
