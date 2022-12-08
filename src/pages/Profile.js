@@ -33,6 +33,7 @@ export default function Profile(){
     return(
         <div className='profile page'>
             <div className="header row justify-content-start align-items-start">
+                
                 <div className="col-lg-6 text-left">
                     <div className="row justify-content-start align-items-center my-0">
                         <div className="col-lg-10 text-left my-0">
@@ -46,7 +47,6 @@ export default function Profile(){
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <div className="col-lg-6 py-0 text-lg-end">
                     <p className="profile-settings m-0">
@@ -66,18 +66,22 @@ export default function Profile(){
                         >
                             Delete Account
                         </a>
-                        <span><img width="20px" className="m-3" src="./assets/Icon-gear-white.png" alt='new'/></span>
+                        <span><img 
+                                width="20px" className="m-3" 
+                                src="./assets/Icon-gear-white.png" alt='new'
+                            />
+                        </span>
                     </p>
                 </div>
             </div>
             <div className="row justify-content-center align-items-start">
-                <div className="col-lg-5 text-left m-lg-1 order-2">
+                <div className="col-lg-5 text-left mx-lg-1 order-2">
                     <Friends/>
                     <Gallery/>
                     <Users/>
                     <News/>
                 </div>
-                <div className="col-lg-5 text-left my-lg-1 order-1">
+                <div className="col-lg-5 text-left mx-lg-1 order-1">
                     <Messages/>
                 </div>
             </div>

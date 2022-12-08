@@ -85,19 +85,11 @@ export default function Messages(){
                 data.docs.map( (doc) => 
                     ({ ...doc.data() }) 
                 ) 
-                .sort(function(a,b){
+                .sort( (a,b) => {
                     return (b.date - a.date)
                 })
             );
-            if(sort){
-                console.log("sort messages");
-                setMessages( 
-                    messages.sort(function(a,b){
-                        return (b.date - a.date)
-                    })
-                );
-            }
-        }catch(error){ console.log(error);}
+        }catch(error){ console.log(error); }
 
         try{
             data = await getDocs( collection(db, 'comments') );
@@ -105,11 +97,11 @@ export default function Messages(){
                 data.docs.map( (doc) => 
                     ({ ...doc.data() }) 
                 ) 
-                .sort(function(a,b){
+                .sort( (a,b) => {
                     return (a.date - b.date)
                 })
             );
-        }catch(error){ console.log(error);}
+        }catch(error){ console.log(error); }
     };
 
     // Create message post
@@ -317,20 +309,12 @@ export default function Messages(){
 
     const showCommentID = async (id) => {
         setCommentID(id);
-
-        // setCommentIDS([...commentIDS, {id:id, show:true}]);
         console.log("commentIDS =>" , commentIDS);
     }
 
     return(
-        <div className="messages row text-left align-items-center p-lg-5 pb-lg-3 p-3 my-2">
+        <div className="messages row text-left align-items-center p-lg-5 pt-lg-4 pb-lg-3 p-3 my-0">
             <h2 className="mx-2">News Feed 
-                {/* <a href
-                    className="float-end text-white"
-                    onClick={ (e) => { setSort(!sort); } }
-                >
-                        Recent
-                </a> */}
             </h2>
 
             {messages.slice(0, messagesCount).map( (message) => (
@@ -349,10 +333,9 @@ export default function Messages(){
                             {message.first} {message.last} 
                             <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
                                 {message.time}
-
-                                {/* {message.edited && 
+                                {message.edited && 
                                         <span class="mx-1" style={{fontSize:"8px"}}>Edited</span>
-                                } */}
+                                }
                             </span>
                         </span>
 
@@ -363,6 +346,7 @@ export default function Messages(){
                                 id={message.id} 
                                 onClick={ (e) => { 
                                     msgMenuClicked(e); 
+                                    // setShowMenu(!showMenu);
                                     formData.message = message.message;
                                 }}
                             >    
@@ -476,7 +460,6 @@ export default function Messages(){
                                 <a href
                                     onClick={ (e) => {
                                         console.log("Message =>", message.id);
-                                        // setShowComment(!showComment);
                                         showCommentID(message.id);
                                     }} 
                                 >

@@ -34,10 +34,11 @@ export default function Friends(){
             ...doc.data()
         }) ) );
         
+        let count = 0;
         friends.forEach( (friend) => {
-            setFriendsCount( friendsCount => friendsCount + 1 );
-            console.log('friend.id => ' + friend.id );
+            count++;
         });
+        setFriendsCount( count );
     };
     
     const deleteFriend = async (id) => {
@@ -66,34 +67,24 @@ export default function Friends(){
     };
 
     return(
-        <div className='friends my-lg-2'>
-            <div className="row justify-content-lg-left justify-content-center align-items-center p-lg-5">
+        <div className='friends my-lg-0'>
+            <div className="row justify-content-lg-left justify-content-center align-items-center px-lg-5 py-lg-0 py-lg-4">
                 <div className="col-lg-6 text-lg-start">
-                    {/* <h2>Friends ({currentUser.friendsCount})</h2>   */}
-                    {/* <h2>Friends (8)</h2>   */}
-                    <h2>Friends</h2> 
+                    <h2>Friends</h2>
                 </div>
                 <div className="col-lg-6 text-lg-end text-decoration-underline">
                     <button className="text-decoration-underline text-white">See all friends</button> 
                 </div>
-                {/* { console.log("Friends.js", currentUser.friends) } */}
                 {friends.map( (user) => 
-                    //  currentUser.friends.includes( user.id ) ?  
-                        <div className="col-lg-3 col-6" id={user.id} key={user.id}>
-                            <a href>
-                                <img className="headshot my-2" width="100%" src={user.imgURL} alt="new"/>
-                                <p style={{fontSize:'15px'}}>
-                                    {user.first} {user.last}<br></br>
-                                    {/* {user.email}<br></br> */}
-                                </p>
-                                {/* <span><button 
-                                    onClick={ () => { deleteFriend(user.id) } } 
-                                    className="Del-btn">Delete
-                                </button></span>
-                                <hr></hr> */}
-                            </a>
-                        </div>
-                    //  : ''
+                    <div className="col-lg-3 col-6" id={user.id} key={user.id}>
+                        <a href>
+                            <img className="headshot my-2" width="100%" src={user.imgURL} alt="new"/>
+                            <p style={{fontSize:'15px'}}>
+                                {user.first} {user.last}<br></br>
+                            </p>
+
+                        </a>
+                    </div>
                 )}                
             </div>
         </div>  

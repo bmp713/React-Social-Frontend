@@ -36,10 +36,12 @@ export default function Users(){
             ...doc.data()
         }) ) );
         
+        let profilesCount = 0;
         profiles.forEach( (friend) => {
-            setProfilesCount( profilessCount => profilessCount + 1 );
-            console.log('friend.id => ' + friend.id );
+            profilesCount++;
         });
+        setProfilesCount(profilesCount);
+
     };
 
     const addFriend = async (id) => {
@@ -62,9 +64,9 @@ export default function Users(){
 
     return(
         <div className='friends my-2'>
-            <div className="row justify-content-lg-center align-items-center p-lg-5">
+            <div className="row justify-content-lg-center align-items-center px-lg-5 py-lg-4">
             <div className="col-lg-6 text-lg-start">
-                    <h2>Users (8)</h2> 
+                    <h2>Users ({profilesCount})</h2> 
                 </div>
                 <div className="col-lg-6 text-lg-end">
                     <button className="text-decoration-underline text-white">See more users</button> 

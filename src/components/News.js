@@ -57,7 +57,7 @@ export default function News(){
 
     return(
             <div 
-                className="row justify-content-lg-between align-items-start p-lg-5 p-4 text-white"
+                className="row justify-content-lg-between align-items-start py-lg-5 p-4 text-white"
                 style={{
                     margin:'25px 0px', 
                     color:'#ffff', 
@@ -65,22 +65,24 @@ export default function News(){
                     borderRadius: '2px',
                 }}
             >
-                <div className="col-lg-12 text-left">
+                <div className="col-lg-12 text-left px-3">
                     <h2>NY Times    
-                        <p>Top Headlines</p>               
+                        <p>Top Headlines
                         <span>
-                        <button 
-                            className="text-decoration-underline text-white float-end"
-                            onClick={ () => { setNumArticles(maxArticles) }}
-                        >
-                        See all articles
-                        </button></span>
+                            <button 
+                                className="text-decoration-underline text-white float-end"
+                                onClick={ () => { setNumArticles(maxArticles) }}
+                            >
+                            See all articles
+                            </button>
+                        </span>    
+                        </p>               
+
                     </h2>
                     <hr></hr>  
                 </div>
-                <div className="col-lg-6 text-lg-end text-decoration-underline">
-                </div>
-                <div className="row text-left">
+
+                <div className="row text-left px-4">
                         { articles.slice(0, numArticles).map( (article, index ) =>  
                                 <div className="col-xl-5" key={index}>
                                     <a 

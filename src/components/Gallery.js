@@ -142,7 +142,7 @@ export default function Gallery(){
     }
 
     return(
-        <div className='gallery my-4 p-5'>
+        <div className='gallery my-4 p-5 py-lg-4'>
             <div className="row justify-content-lg-between align-items-start">
                 <div className="col-lg-12 text-left">
                     <h2>Gallery
