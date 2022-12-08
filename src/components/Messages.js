@@ -333,9 +333,9 @@ export default function Messages(){
                             {message.first} {message.last} 
                             <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
                                 {message.time}
-                                {message.edited && 
+                                {/* {message.edited && 
                                         <span class="mx-1" style={{fontSize:"8px"}}>Edited</span>
-                                }
+                                } */}
                             </span>
                         </span>
 
