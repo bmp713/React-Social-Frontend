@@ -331,14 +331,17 @@ export default function Messages(){
                             style={{fontWeight:"500"}}
                         >
                             {message.first} {message.last} 
-                            <span style={{margin:"0px 5px", fontSize:"12px", fontWeight:"300"}}>
-                                {message.time}
-                                {/* {message.edited && 
-                                        <span class="mx-1" style={{fontSize:"8px"}}>Edited</span>
-                                } */}
-                            </span>
-                        </span>
 
+                            {   message.edited ? 
+                                    <span style={{margin:"0px 5px", color:"#000f",fontSize:"12px", fontWeight:"300"}}>
+                                        {message.time}
+                                    </span>
+                                    :
+                                    <span style={{margin:"0px 5px", color:"#000f",fontSize:"12px", fontWeight:"200"}}>
+                                        {message.time}
+                                    </span>
+                            }
+                        </span>
 
                         { currentUser.email === message.email && 
                             <a href
