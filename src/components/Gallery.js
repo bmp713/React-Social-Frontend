@@ -155,7 +155,7 @@ export default function Gallery(){
                     (currentUser.id !== image.userId) ? '' : (
                         <div
                             style={{ background:'#0000', borderRadius:'4px', boxShadow:"1px 1px 5px #0002"}} 
-                            className="col-lg-12 my-lg-2 my-2 p-3" id={image.id} key={image.id}
+                            className="col-lg-6 my-lg-2 my-2 p-3" id={image.id} key={image.id}
                         >
                             {/* <img 
                                 width="30"
