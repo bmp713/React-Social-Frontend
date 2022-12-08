@@ -63,11 +63,6 @@ export default function Messages(){
                 ({ ...doc.data() }) 
             ) 
         );
-        data.forEach( (message) => {
-            // console.log("readUsers() message.data().id =>",  message.data().id );
-            console.log("readUsers() => readUser( message.data().id ) =>", readUser(message.data().id) );
-        });
-        // console.log("users =>)", users);
     };
 
     // Read single user to update profile images and comments
@@ -85,7 +80,10 @@ export default function Messages(){
                 data.docs.map( (doc) => 
                     ({ ...doc.data() }) 
                 ) 
-                .sort( (a,b) => {
+                .sort( (a, b) => {
+                    console.log("readMessages() sort => ", sort);
+                    if(sort)
+                        return (b.likes - a.likes)
                     return (b.date - a.date)
                 })
             );
@@ -110,8 +108,6 @@ export default function Messages(){
         e.preventDefault();
         console.log("createMessage");
  
-        // Add new message to database
-        
         let date = new Date();
         let time = ( 
             date.getMonth()+ 1 ) + "/" + date.getDate() + "/" + date.getFullYear() + " " + (date.getHours() % 12 || 12) + ":" 
@@ -202,9 +198,7 @@ export default function Messages(){
     };
 
     const deleteMessage = async (id) => {
-        console.log('deleteDoc(id) => ' + id);
         setShowMenu( !showMenu );
-
         try{
             await deleteDoc( doc(db, 'messages', id) );
             readMessages();
@@ -214,6 +208,10 @@ export default function Messages(){
             console.log(error);
         }
     };
+
+    // Clear all forms 
+    const clearForms = () => {
+    }
 
     // Edit message by message ID
     const editMessage = async (id) => {
@@ -306,16 +304,35 @@ export default function Messages(){
         setImageUrl( docSnap.data().imageURL );
         setFormData({...formData, imageURL: docSnap.data().imageURL});
     }
+
     const showCommentID = async (id) => {
         setCommentID(id);
-        console.log("commentIDS =>" , commentIDS);
     }
+
     return(
         <div className="messages row text-left align-items-center p-lg-5 pt-lg-4 pb-lg-3 p-3 my-0">
             <h2 className="mx-2">News Feed 
+                <span className="float-end">
+                    <a href 
+                        onClick={ (e) => { 
+                            console.log("sort = ", sort);
+                            readMessages();
+                            setSort(!sort);
+                        }}
+                    >
+                        <div    
+                            style={{fontSize:"12px",transform:"translate(0,100%)"}}>
+                            Sort <></>
+                            { sort ?
+                                    <span style={{textDecoration:"underline", fontSize:"12px"}}>Date</span> :
+                                    <span style={{textDecoration:"underline", fontSize:"12px"}}>Likes</span> 
+                            }
+                        </div>
+                    </a>
+                </span>
             </h2>
-
             {messages.slice(0, messagesCount).map( (message) => (
+
                 <div className="message mb-3 mt-2 pb-2" id={message.id} key={message.id}>
                     <div className="col-lg-12 px-lg-2 pt-3 pb-2" >              
                         <img 
