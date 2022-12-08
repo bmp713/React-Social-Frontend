@@ -57,7 +57,7 @@ export default function News(){
 
     return(
             <div 
-                className="row justify-content-lg-between align-items-start py-lg-5 p-4 text-white"
+                className="row justify-content-lg-between align-items-start p-lg-4 p-2 text-white"
                 style={{
                     margin:'25px 0px', 
                     color:'#ffff', 

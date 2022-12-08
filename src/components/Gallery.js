@@ -142,7 +142,7 @@ export default function Gallery(){
     }
 
     return(
-        <div className='gallery my-4 p-5 py-lg-4'>
+        <div className='gallery my-4 px-lg-5 p-4 p-4'>
             <div className="row justify-content-lg-between align-items-start">
                 <div className="col-lg-12 text-left">
                     <h2>Gallery
@@ -225,44 +225,36 @@ export default function Gallery(){
                         </div>
                     )
                 ))}                
-                <div className="col-lg-12 text-left">
-                    <div className="create text-left">   
-                        <form id='form' onSubmit={createImage}>
-                            <div className="row text-left my-0">
-                                <h4>Add Image</h4>  
-                            </div>
-                            {/* <input 
-                                value={formData.search} 
-                                onChange={ function(e){ setFormData({...formData, search: e.target.value}) } }    
-                                type="text" placeholder="Search by category"
-                            /> */}
-                            <input 
-                                value={formData.image} 
-                                onChange={ function(e){ setFormData({...formData, image: e.target.value}) } }    
-                                type="text" placeholder="Image URL"
-                            />
-                            <br></br>
-                            <input 
-                                onChange={ (e) => { 
-                                    setFile( e.target.files[0] );
-                                    console.log("file =>", file);
-                                    uploadFile(e);
-                                    createImage();
-                                }}    
-                                type="file"
-                            /><br></br>
-                            {(!file) ? '' : (
-                                <div className="col-lg-12 text-left p-2">
-                                    <img width="50%" src={imageURL} alt=""></img>
-                                    <br></br>
-                                    {imageURL}                            
-                                </div>
-                            )}
-                            <input className="submit-btn" type="submit" value="Add"/><br></br>
-                            { error ? <p className="text-danger mx-2"> Please fill in all fields</p> : '' }
-                        </form>
+                <div className="col-lg-12">
+                    <form id='form' onSubmit={createImage}>
+                        <div className="row">
+                            <h4>Add Image</h4>  
+                        </div>
+                        <input 
+                            value={formData.image} 
+                            onChange={ function(e){ setFormData({...formData, image: e.target.value}) } }    
+                            type="text" placeholder="Image URL"
+                        />
                         <br></br>
-                    </div>
+                        <input 
+                            onChange={ (e) => { 
+                                setFile( e.target.files[0] );
+                                uploadFile(e);
+                                createImage();
+                            }}    
+                            type="file"
+                        /><br></br>
+                        {(!file) ? '' : (
+                            <div className="col-lg-12 text-left p-2">
+                                <img width="50%" src={imageURL} alt=""></img>
+                                <br></br>
+                                {imageURL}                            
+                            </div>
+                        )}
+                        <input className="submit-btn" type="submit" value="Add"/><br></br>
+                        { error ? <p className="text-danger mx-2"> Please fill in all fields</p> : '' }
+                    </form>
+                    <br></br>
                 </div>
 
             </div>

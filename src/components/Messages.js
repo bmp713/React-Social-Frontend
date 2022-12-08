@@ -318,7 +318,7 @@ export default function Messages(){
             </h2>
 
             {messages.slice(0, messagesCount).map( (message) => (
-                <div className="message mb-3 mt-2" id={message.id} key={message.id}>
+                <div className="message mb-3 mt-2 pb-2" id={message.id} key={message.id}>
                     <div className="col-lg-12 px-lg-2 pt-3 pb-2" >              
                         <img 
                             width="50" height="50" 

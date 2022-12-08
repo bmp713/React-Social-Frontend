@@ -41,7 +41,7 @@ export default function Profile(){
                                 <h2 className="my-0">                            
                                     {currentUser.first} {currentUser.last}
                                 </h2>
-                                <span className="d-none d-lg-inline-block">
+                                <span className="d-none d-lg-inline-block mx-1">
                                     {currentUser.email}<br></br>
                                 </span>    
                             </div>
