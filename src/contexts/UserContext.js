@@ -34,7 +34,7 @@ export const UserProvider = ( {children} ) => {
         readprofile( JSON.parse( window.localStorage.getItem('currentUserID')) );
         setCurrentUserID( JSON.parse( window.localStorage.getItem('currentUserID')) );
     },[]);
-
+ 
     // Login updates the user data with a name parameter    
     const login = (name, password) => {
 
