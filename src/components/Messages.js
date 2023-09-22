@@ -28,12 +28,12 @@ export default function Messages(){
     const [users, setUsers] = useState("");
     const [commentID, setCommentID] = useState(0);
     const [comments, setComments] = useState([]);
- 
+
     const [formData, setFormData] = useState({
         message: '',
         comment: '',
         imageURL: ''
-    });
+    }); 
 
     const [file, setFile] = useState("");
     const [imageURL, setImageUrl] = useState(null);
