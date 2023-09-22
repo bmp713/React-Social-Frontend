@@ -11,7 +11,7 @@ import Comment from './Comment';
 import {UserContext} from '../contexts/UserContext';
 
 export const commentContext = createContext();
-
+ 
 export default function Messages(){
 
     // User authentication
