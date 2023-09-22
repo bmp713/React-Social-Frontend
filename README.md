@@ -13,7 +13,7 @@ Upload images to posts or gallery, share, like posts
 Add/remove favorite News articles to Shared public News feed
 
 Run Locally with npm start in frontend
-Run backend with nodemon server.js
+Run backend with nodemon server.js 
 
 
 
