@@ -103,7 +103,7 @@ export const UserProvider = ( {children} ) => {
             login(email, password);
         });
     }
-
+ 
     // Create user additional profile data in users db
     const createUserFirebase = async ( id, first, last, email, password ) => {
 
