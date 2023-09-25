@@ -61,7 +61,7 @@ export const UserProvider = ( {children} ) => {
         return signInWithEmailAndPassword(auth, name, password)
             .then((userCredential) => {
                 // console.log( name, 'signed in' );
-                readprofile( auth.currentUser.uid );
+                readprofile( auth.currentUser.uid ); 
                 setCurrentUserID(auth.currentUser.uid);
 
                 // window.localStorage.setItem('currentUserID', JSON.stringify(auth.currentUser.uid));
