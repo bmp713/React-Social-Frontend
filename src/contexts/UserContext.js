@@ -54,7 +54,7 @@ export const UserProvider = ( {children} ) => {
             .then(data => {
             })    
             .catch(err => console.error(err))
-
+ 
 
 
         
