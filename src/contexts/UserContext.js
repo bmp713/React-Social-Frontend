@@ -55,8 +55,6 @@ export const UserProvider = ( {children} ) => {
             })    
             .catch(err => console.error(err))
  
-
-
         
         return signInWithEmailAndPassword(auth, name, password)
             .then((userCredential) => {
