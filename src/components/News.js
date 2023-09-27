@@ -148,7 +148,7 @@ export default function News(){
                             See all articles
                             </button>
                         </span>    
-                        </p>               
+                        </p>              
                     </h2>
                     <hr></hr>  
                 </div>
