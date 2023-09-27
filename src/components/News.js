@@ -131,7 +131,7 @@ export default function News(){
                         <p>
                             <a 
                                 href="www"
-                                className="text-white"
+                                className="text-white text-decoration-underline"
                                 onClick={ e => {
                                     e.preventDefault();
                                     setSection(!section);
