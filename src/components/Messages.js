@@ -70,14 +70,12 @@ export default function Messages(){
 
     //Read messages and comments from databse
     const readMessages = async () => {
-        console.log("readMessages()",);
 
         // Fetch messages from Node API
         fetch(`https://react-social-backend.up.railway.app/messages/read`)
         // fetch(`http://localhost:4000/messages/read`)
             .then(res => res.json())
             .then(data => {
-                console.log("readMessages data =>", data);
 
                 // Read messages from API
                 data = data.sort( (a, b) => {
