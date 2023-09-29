@@ -95,7 +95,7 @@ export default function Messages(){
         // Fetch comments from Node API
         fetch(`https://react-social-backend.up.railway.app/comments/read`)
         // fetch(`http://localhost:4000/comments/read`)
-            .then(res => res.json())
+            .then(res => res.json()) 
             .then(data => {
                 // Read messages from API
                 setComments(data);
