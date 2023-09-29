@@ -89,7 +89,7 @@ export default function Messages(){
             .catch(err => {
                 console.error(err);
             }) 
- 
+
         // Fetch comments from Node API
         fetch(`https://react-social-backend.up.railway.app/comments/read`)
         // fetch(`http://localhost:4000/comments/read`)
