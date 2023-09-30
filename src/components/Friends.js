@@ -73,17 +73,20 @@ export default function Friends(){
                     <h2>Friends</h2>
                 </div>
                 <div className="col-lg-6 text-lg-end text-decoration-underline">
-                    <button className="text-decoration-underline text-white">See all friends</button> 
+                    <button 
+                        onClick={() => window.location.reload(false)}
+                        className="text-decoration-underline text-white">
+                        See all friends
+                    </button> 
                 </div>
                 {friends.map( (user) => 
-                    <div className="col-lg-3 col-6" id={user.id} key={user.id}>
-                        <a href>
-                            <img className="headshot my-2" width="100%" src={user.imgURL} alt="new"/>
-                            <p style={{fontSize:'15px'}}>
+                    <div className="col-lg-3 col-6 text-white" id={user.id} key={user.id}>
+                        <button onClick={() => window.location.reload(false)}>
+                            <img className="headshot my-2 text-white" width="100%" src={user.imgURL} alt="new"/>
+                            <p style={{fontSize:'15px', color:"white"}}>
                                 {user.first} {user.last}<br></br>
                             </p>
-
-                        </a>
+                        </button>
                     </div>
                 )}                
             </div>
