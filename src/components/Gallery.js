@@ -25,7 +25,7 @@ export default function Gallery(){
     });
 
     const [showMenu, setShowMenu] = useState(false);
-    //const [showMenuID, setShowMenuID] = useState(false);
+    //const [showMenuID, setShowMenuID] = useState(false)
 
     const [showURL, setShowURL] = useState(false);
     const [showURL_ID, setShowURL_ID] = useState(null);
@@ -201,11 +201,13 @@ export default function Gallery(){
                                 className="my-2 img-responsive" 
                                 src={image.imageURL} alt="new"
                             /> */}
+                            <a className="" href={image.imageURL} target="_blank" rel="noreferrer">
                             <img 
                                 className="align-self-center my-2"
                                 style={{maxWidth:'100%', maxHeight:'250px'}} 
                                 src={image.imageURL} alt="new"
                             />
+                            </a>
                             {   showMenu &&
                                     <div className="icons row justify-content-lg-left align-items-start">
                                         <div className="col-3 text-left">    
