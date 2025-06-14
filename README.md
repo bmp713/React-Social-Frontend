@@ -15,5 +15,3 @@ Run frontend locally with npm start
 
 Run backend with nodemon server.js 
 
-
-
