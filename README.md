@@ -14,13 +14,12 @@ Add/remove favorite News articles to Shared public News feed
 To run locally download both frontend and backend
 
 ## Run Frontend 
-npm install
+npm install  
 npm start 
 
 ## Run Backend
-npm install
-nodemon server.js 
-
+npm install  
+nodemon server.js   
 Login with "Demo" as user and password as "Welcome123"
 
 
