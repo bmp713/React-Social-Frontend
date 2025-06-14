@@ -13,7 +13,7 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
     // Fetch comments for this message
     const readComments = async () => {
         try {
-            const response = await fetch(`https://react-social-back-end.up.railway.app/comments/read`)
+            const response = await fetch(`https://react-social-backend.up.railway.app/comments/read`)
             // const response = await fetch(`http://localhost:4000/comments/read`);
             const data = await response.json();
             setComments(data.filter(comment => comment.msgId === msgId));
@@ -48,7 +48,7 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
             setComments(prevComments => [...prevComments, newComment]);
             setCommentText("");
 
-            const response = await fetch(`https://react-social-back-end.up.railway.app/comments/create`, {
+            const response = await fetch(`https://react-social-backend.up.railway.app/comments/create`, {
                 // const response = await fetch(`http://localhost:4000/comments/create`, {
                 method: 'POST',
                 headers: {
@@ -74,7 +74,7 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
         try {
             setComments(prevComments => prevComments.filter(comment => comment.id !== id));
 
-            const response = await fetch(`https://react-social-back-end.up.railway.app/comments/delete/${id}`, {
+            const response = await fetch(`https://react-social-backend.up.railway.app/comments/delete/${id}`, {
                 // const response = await fetch(`http://localhost:4000/comments/delete/${id}`, {
                 method: 'DELETE'
             });
@@ -90,7 +90,6 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
 
     useEffect(() => {
         if (msgId) readComments();
-        // eslint-disable-next-line
     }, [msgId]);
 
     return (

@@ -13,10 +13,8 @@ export const useMessages = (currentUser) => {
     };
 
     // Read messages from API
-    const readMessages = async (sortOrder = false) => {
-
-        try {
-            const response = await fetch(`https://react-social-back-end.up.railway.app/messages/read`);
+    const readMessages = async (sortOrder = false) => {        try {
+            const response = await fetch(`https://react-social-backend.up.railway.app/messages/read`);
             // const response = await fetch(`http://localhost:4000/messages/read`);
             const data = await response.json();
 
@@ -34,9 +32,7 @@ export const useMessages = (currentUser) => {
     const createMessage = async (messageData) => {
         try {
             const id = Math.floor(Math.random() * 10000000000000000);
-            const time = formatDate();
-
-            const response = await fetch(`https://react-social-back-end.up.railway.app/messages/create`, {
+            const time = formatDate();            const response = await fetch(`https://react-social-backend.up.railway.app/messages/create`, {
                 // const response = await fetch(`http://localhost:4000/messages/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

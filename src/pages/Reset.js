@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
 import '../App.scss';
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, Route, Routes, useNavigate, BrowserRouter as Router, Navigate } from 'react-router-dom';
-import { getAuth, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail } from "firebase/auth";
-//import { db } from '../Firebase';
+import React, { useState, useContext } from 'react';
+import { getAuth } from "firebase/auth";
 
 import { UserContext } from '../contexts/UserContext';
 
