@@ -103,7 +103,7 @@ export default function MessageItem({
                     />
                 )}
                 <hr />
-                {/* Message action buttons*/}
+                {/* Message action buttons */}
                 <MessageActions
                     message={message}
                     onLike={() => onLike(message.id)}
