@@ -16,7 +16,6 @@ export const UserProvider = ({ children }) => {
     const [currentUserID, setCurrentUserID] = useState('id');
     const [currentUserIMG, setCurrentUserIMG] = useState('id');
 
-
     // console.log("UserContext localStorage => ", window.localStorage.getItem('currentUserID' ) );
     // If Freezes
     // Fixes state on refresh if logout with deleted auth but not user additional info

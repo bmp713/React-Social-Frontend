@@ -44,7 +44,6 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
                 date: Date.now()
             };
 
-            // Optimistically add the comment to UI immediately
             setComments(prevComments => [...prevComments, newComment]);
             setCommentText("");
 
@@ -64,7 +63,6 @@ export default function Comment({ msgId, currentUser, showInput = true }) {
             }
         } catch (err) {
             console.error('Error creating comment:', err);
-            // If there was an error, refresh comments from server
             await readComments();
         }
     };
