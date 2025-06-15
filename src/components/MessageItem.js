@@ -102,12 +102,14 @@ export default function MessageItem({
                         onDelete={handleDelete}
                     />
                 )}
-                <hr />                {/* Message buttons */}                <MessageActions
+                <hr />
+                {/* Message action buttons*/}
+                <MessageActions
                     message={message}
                     onLike={() => onLike(message.id)}
                     onShare={() => window.open(message.imageURL, '_blank')}
                     onComment={() => onComment(message.id)}
-                />{/* Comments - Always visible */}
+                />
                 <Comment msgId={message.id} currentUser={currentUser} showInput={showCommentInput} />
             </div>
         </div>
