@@ -7,7 +7,6 @@ import { UserContext } from '../contexts/UserContext';
 export default function Signup() {
 
     const { currentUser, login, signup, logout } = useContext(UserContext);
-
     const navigate = useNavigate();
 
     const [msgSubmit, setMsgSubmit] = useState({ message: '', color: 'red' })
@@ -128,7 +127,6 @@ export default function Signup() {
                 </div>
             </div>
         </div>
-
     )
 }
 

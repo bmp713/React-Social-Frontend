@@ -1,7 +1,6 @@
 import './App.scss';
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-
 import { UserProvider } from './contexts/UserContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';

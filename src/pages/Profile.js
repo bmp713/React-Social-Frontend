@@ -13,9 +13,7 @@ import News from '../components/News';
 import { UserContext } from '../contexts/UserContext';
 
 export default function Profile() {
-
     const { currentUser, login, logout, setCurrentUser, updateUserFirebase, deleteUserFirebase } = useContext(UserContext);
-
     const navigate = useNavigate();
 
     const logoutProfile = () => {

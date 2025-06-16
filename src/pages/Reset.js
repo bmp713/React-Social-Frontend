@@ -7,7 +7,6 @@ import { UserContext } from '../contexts/UserContext';
 export default function Reset() {
 
     const { currentUser, login, signup, logout, reset } = useContext(UserContext);
-
     const auth = getAuth();
 
     useEffect(() => {

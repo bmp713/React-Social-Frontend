@@ -4,6 +4,7 @@ export const useMessages = (currentUser) => {
     const [messages, setMessages] = useState([]);
     const [error, setError] = useState(null);
 
+    // Format timestamps for messages
     const formatDate = () => {
         const date = new Date();
         return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " +
@@ -13,7 +14,8 @@ export const useMessages = (currentUser) => {
     };
 
     // Read messages from API
-    const readMessages = async (sortOrder = false) => {        try {
+    const readMessages = async (sortOrder = false) => {
+        try {
             const response = await fetch(`https://react-social-backend.up.railway.app/messages/read`);
             // const response = await fetch(`http://localhost:4000/messages/read`);
             const data = await response.json();
@@ -32,7 +34,8 @@ export const useMessages = (currentUser) => {
     const createMessage = async (messageData) => {
         try {
             const id = Math.floor(Math.random() * 10000000000000000);
-            const time = formatDate();            const response = await fetch(`https://react-social-backend.up.railway.app/messages/create`, {
+            const time = formatDate();
+            const response = await fetch(`https://react-social-backend.up.railway.app/messages/create`, {
                 // const response = await fetch(`http://localhost:4000/messages/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -66,12 +69,12 @@ export const useMessages = (currentUser) => {
 
     const updateMessage = async (messageId, updatedData) => {
         try {
-            const response = await fetch(`https://react-social-back-end.up.railway.app/messages/read/${messageId}`);
+            const response = await fetch(`https://react-social-backend.up.railway.app/messages/read/${messageId}`);
             // const response = await fetch(`http://localhost:4000/messages/read/${messageId}`);
             const currentData = await response.json();
 
             const time = formatDate();
-            const updateResponse = await fetch(`https://react-social-back-end.up.railway.app/messages/update/${messageId}`, {
+            const updateResponse = await fetch(`https://react-social-backend.up.railway.app/messages/update/${messageId}`, {
                 // const updateResponse = await fetch(`http://localhost:4000/messages/update/${messageId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -97,7 +100,7 @@ export const useMessages = (currentUser) => {
 
     const deleteMessage = async (messageId) => {
         try {
-            const response = await fetch(`https://react-social-back-end.up.railway.app/messages/delete/${messageId}`, {
+            const response = await fetch(`https://react-social-backend.up.railway.app/messages/delete/${messageId}`, {
                 // const response = await fetch(`http://localhost:4000/messages/delete/${messageId}`, {
                 method: 'DELETE'
             });
@@ -114,7 +117,7 @@ export const useMessages = (currentUser) => {
 
     const updateLikes = async (messageId) => {
         try {
-            const response = await fetch(`https://react-social-back-end.up.railway.app/messages/read/${messageId}`);
+            const response = await fetch(`https://react-social-backend.up.railway.app/messages/read/${messageId}`);
             // const response = await fetch(`http://localhost:4000/messages/read/${messageId}`);
             const data = await response.json();
 
@@ -129,7 +132,7 @@ export const useMessages = (currentUser) => {
                 newLikes = parseInt(data.likes) - 1;
             }
 
-            const updateResponse = await fetch(`https://react-social-back-end.up.railway.app/messages/update/${messageId}`, {
+            const updateResponse = await fetch(`https://react-social-backend.up.railway.app/messages/update/${messageId}`, {
                 // const updateResponse = await fetch(`http://localhost:4000/messages/update/${messageId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
