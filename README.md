@@ -21,7 +21,8 @@ npm start
 npm install  
 nodemon server.js   
 
-Login with "Demo" as user and password as "Welcome123"
+Login with "Demo" as user and password as "Welcome123"  
+Or create a new account
 
 
 
