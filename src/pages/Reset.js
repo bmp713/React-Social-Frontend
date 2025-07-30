@@ -1,5 +1,6 @@
 import '../App.scss';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getAuth } from "firebase/auth";
 
 import { UserContext } from '../contexts/UserContext';
@@ -48,6 +49,8 @@ export default function Reset() {
                 <div className="col-lg-5 text-start ">
                     <div className="col-lg-10 text-left text-lg-white p-4">
                         <h1>Password Reset</h1>
+                        <h3>Please enter your email address to reset your password.</h3>
+
                     </div>
                     <div className="App-modal">
                         <form onSubmit={sendPasswordEmail}>

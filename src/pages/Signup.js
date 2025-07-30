@@ -1,6 +1,6 @@
 import '../App.scss';
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { UserContext } from '../contexts/UserContext';
 
@@ -64,12 +64,12 @@ export default function Signup() {
                         <form id='form'>
                             <h2>Sign Up</h2>
                             <input
-                                value={formData.name}
+                                value={formData.first || ""}
                                 onChange={function (e) { setFormData({ ...formData, first: e.target.value }) }}
                                 type="text" placeholder="First Name"
                             /><br></br>
                             <input
-                                value={formData.name}
+                                value={formData.last || ""}
                                 onChange={function (e) { setFormData({ ...formData, last: e.target.value }) }}
                                 type="text" placeholder="Last Name"
                             /><br></br>
